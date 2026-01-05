@@ -168,14 +168,14 @@ def new_transaction():
 
     required = ["sender", "recipient", "amount"]
 
-    if not all(val for val in required):
+    if not all(k in values for k in required):
         return "Missing values", 400
 
     index = blockchain.new_transaction(values["sender"], values["recipient"], values["amount"]) #adds transaction to self.new_transaction
 
-    response = {"message": f"transaction will be added to Block{index}"}
+    response = {"message": f"transaction will be added to Block: {index}"}
 
-    return jsonify(response), 101
+    return jsonify(response), 201
 
                                                                                 #returns full blockchain and its length
 @app.route("/chain", methods=["GET"])
